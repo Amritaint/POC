@@ -22,11 +22,21 @@ jobs:
     #     echo "BUILD_DATE=$BUILD_DATE" >> $GITHUB_OUTPUT
     #     echo "IMAGE_AUTHOR=$AUTHOR" >> $GITHUB_OUTPUT
     #   shell: bash
-    - name: Parse package labels from .csproj
+
+    # - name: Parse package labels from .csproj
+    #   id: csproj_labels
+    #   run: |
+    #     PACKAGE_LABELS=$(grep -oP '<PackageReference Include="\K[^"]+' SEM.NG.DataQuery.Service.csproj | paste -sd "," -)
+    #     echo "PACKAGE_LABELS=$PACKAGE_LABELS" >> $GITHUB_OUTPUT
+    #   shell: bash
+
+    - name: Parse package labels and versions from .csproj
       id: csproj_labels
       run: |
-        PACKAGE_LABELS=$(grep -oP '<PackageReference Include="\K[^"]+' SEM.NG.DataQuery.Service.csproj | paste -sd "," -)
-        echo "PACKAGE_LABELS=$PACKAGE_LABELS" >> $GITHUB_OUTPUT
+        labels=$(grep -oP '<PackageReference Include="\K[^"]+' SEM.NG.DataQuery.Service.csproj)
+        versions=$(grep -oP 'Version="\K[^"]+' SEM.NG.DataQuery.Service.csproj)
+        combined=$(paste -d ":" <(echo "$labels") <(echo "$versions") | paste -sd "," -)
+        echo "PACKAGE_LABELS=$combined" >> $GITHUB_OUTPUT
       shell: bash
 
     - name: Log in to Docker Hub
