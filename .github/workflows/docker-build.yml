@@ -35,13 +35,6 @@ jobs:
         context: . # Build context is the current directory
         push: true # Push the image to the registry
         tags: amrita269/my-docker-app:latest
-
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v6
-      with:
-        context: .
-        push: true
-        tags: my-docker-app:latest
         build-args: |
           IMAGE_VERSION=${{ steps.metadata.outputs.IMAGE_VERSION }}
           BUILD_DATE=${{ steps.metadata.outputs.BUILD_DATE }}
