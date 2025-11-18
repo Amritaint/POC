@@ -26,7 +26,7 @@ jobs:
       id: csproj_labels
       run: |
         labels=$(grep -oP '<PackageReference Include="\K[^"]+' SEM.NG.DataQuery.Service.csproj | paste -sd "," -)
-        echo "PACKAGE_LABELS=$labels" >> $GITHUB_OUTPUT
+        echo "PACKAGE_LABELS=$PACKAGE_LABELS" >> $GITHUB_OUTPUT
       shell: bash
 
     - name: Log in to Docker Hub
