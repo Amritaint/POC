@@ -1,0 +1,14 @@
+FROM alpine:latest
+
+ARG IMAGE_VERSION
+ARG BUILD_DATE
+ARG IMAGE_AUTHOR
+
+LABEL version=$IMAGE_VERSION
+LABEL build_date=$BUILD_DATE
+LABEL author=$IMAGE_AUTHOR
+
+COPY . /app
+WORKDIR /app
+
+CMD ["echo", "Hello from Docker! Version: $IMAGE_VERSION"]
