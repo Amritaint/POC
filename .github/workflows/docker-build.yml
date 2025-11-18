@@ -52,7 +52,7 @@ jobs:
         push: true
         tags: amrita269/my-docker-app:latest
         build-args: |
-          PACKAGE_LABELS=${{ steps.metadata.outputs.PACKAGE_LABELS}}
           # BUILD_DATE=${{ steps.metadata.outputs.BUILD_DATE }}
           # IMAGE_AUTHOR=${{ steps.metadata.outputs.IMAGE_AUTHOR }}
           # PACKAGE_LABELS=${{ steps.csproj_labels.outputs.PACKAGE_LABELS }}
+          PACKAGE_LABELS=${{ steps.csproj_labels.outputs.PACKAGE_LABELS }}
